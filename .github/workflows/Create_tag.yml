@@ -2,9 +2,9 @@ name: Create Tag
 
 on:
   push:
-    branches:
-      - master
-
+    branches: [develop]
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   build:
     runs-on: ubuntu-latest
