@@ -14,3 +14,16 @@ Back de l'application Geo-trace
 3. taper : `npm start` pour lancer api 
 
 API ce lance par défaut sur le port 3000
+
+
+## les routes 
+
+GET `/itineraire`
+
+récupère tous les itinéraires 
+
+GET `/itineraire/2`
+
+recupère itinéraire qui à ID numéro 2 
+
+
