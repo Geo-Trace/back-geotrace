@@ -1,7 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var ITINERAIRES = require('../models/mock-itineraire.json') //mock itinéraire
-var { MongoClient, ObjectId } = require('mongodb')
+const express = require('express');
+const router = express.Router();
+const { MongoClient, ObjectId } = require('mongodb')
 
 /* CRUD de la ressource itineraire */
 
@@ -22,35 +21,33 @@ router.get('/', function (req, res, next) {
     })
   })
 
-  // TODO
-  //res.json(ITINERAIRES);
 });
 
 /* GET  un itinéraire. */
 router.get('/:id', function (req, res, next) {
   // route qui permet de récupérer un itinéraire
 
-  const itineraire = ITINERAIRES.find(element => element.id == req.params.id)
-
   MongoClient.connect('mongodb://localhost:27017', (err, client) => {
     if (err) throw err
 
-    const db = client.db('database-geotrace')
+    try {
+      const db = client.db('database-geotrace')
+  
+      db.collection('itineraire').findOne({_id: ObjectId(req.params.id)}).then((result) => {
+        if (err) throw err
+  
+        console.log(result)
+        res.json(result)
+      })
 
-    db.collection('itineraire').findOne({_id: ObjectId(req.params.id)}).toArray((err, result) => {
-      if (err) throw err
+    }
+    catch {
+      res.status(404).json({message: "Ressource non trouvé"}); 
+    }
 
-      console.log(result)
-      res.json(result)
-    })
   });
 
-  
-
-  
-
-  // TODO 
-  res.json(itineraire);
 });
 
 module.exports = router;
+
