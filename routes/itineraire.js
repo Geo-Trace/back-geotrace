@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ITINERAIRES = require('../models/mock-itineraire.json') //mock itinéraire
-var { MongoClient } = require('mongodb')
+var { MongoClient, ObjectId } = require('mongodb')
 
 /* CRUD de la ressource itineraire */
 
@@ -31,6 +31,23 @@ router.get('/:id', function (req, res, next) {
   // route qui permet de récupérer un itinéraire
 
   const itineraire = ITINERAIRES.find(element => element.id == req.params.id)
+
+  MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+    if (err) throw err
+
+    const db = client.db('database-geotrace')
+
+    db.collection('itineraire').findOne({_id: ObjectId(req.params.id)}).toArray((err, result) => {
+      if (err) throw err
+
+      console.log(result)
+      res.json(result)
+    })
+  });
+
+  
+
+  
 
   // TODO 
   res.json(itineraire);
