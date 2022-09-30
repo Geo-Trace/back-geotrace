@@ -22,5 +22,3 @@ app.use('/itineraire', itineraireRouter);
 app.use('/avis', avisRouter);
 
 module.exports = app;
-
-});
