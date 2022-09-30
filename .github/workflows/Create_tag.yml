@@ -4,7 +4,7 @@ on:
   pull_request:
     types:
       - closed
-    branches: [develop]
+    branches: [Main]
 jobs:
   Create_Tag:
     runs-on: ubuntu-latest
