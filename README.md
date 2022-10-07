@@ -18,8 +18,10 @@ le container expose le port : 3000
 ### procédure d'installation 
 
 1. cloner le projet et placer le terminal à la racine du projet
-2. taper : `npm install` pour installer les dépendances
-3. taper : `npm start` pour lancer api 
+2. crée le fichier `.env` en vous servant de example `.env.example`
+3. modifier les valeurs en fonction de votre système 
+4. taper : `npm install` pour installer les dépendances
+5. taper : `npm start` pour lancer api 
 
 API ce lance par défaut sur le port 3000
 
