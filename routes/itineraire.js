@@ -7,56 +7,50 @@ const { MongoClient, ObjectId } = require('mongodb')
 /* GET tout les itineraires. */
 router.get('/', function (req, res, next) {
   // route qui permet de récuperer tous les itinéraires
-  try {
-    MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+  MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+    try {
       if (err) throw err
-  
+
       const db = client.db('database-geotrace')
-  
+
       db.collection('itineraire').find().toArray((err, result) => {
         if (err) throw err
-  
+
         console.log(result)
         res.json(result)
       })
-    })
 
-  }
-  catch {
-    res.status(500).json({message: "Erreur serveur"}); 
-  }
-
-
+    }
+    catch (err) {
+      res.status(500).json({ message: `erreur server` })
+    }
+  })
 });
 
 /* GET  un itinéraire. */
 router.get('/:id', function (req, res, next) {
   // route qui permet de récupérer un itinéraire
-  try {
+
     MongoClient.connect('mongodb://localhost:27017', (err, client) => {
-      if (err) throw err
-  
       try {
+      if (err) throw err
+
         const db = client.db('database-geotrace')
-    
-        db.collection('itineraire').findOne({_id: ObjectId(req.params.id)}).then((result) => {
+
+        db.collection('itineraire').findOne({ _id: ObjectId(req.params.id) }).then((result) => {
           if (err) throw err
-    
+
           console.log(result)
           res.json(result)
         })
-  
+
       }
-      catch {
-        res.status(404).json({message: "Ressource non trouvé"}); 
+      catch (err) {
+        res.status(404).json({ message: "Ressource non trouvé" });
       }
-  
+
     });
 
-  }
-  catch {
-    res.status(500).json({message: "erreur serveur"}); 
-  }
 
 
 });
