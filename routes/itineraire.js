@@ -7,7 +7,7 @@ const { MongoClient, ObjectId } = require('mongodb')
 /* GET tout les itineraires. */
 router.get('/', function (req, res, next) {
   // route qui permet de récuperer tous les itinéraires
-  MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+  MongoClient.connect(`mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`, (err, client) => {
     try {
       if (err) throw err
 
@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   // route qui permet de récupérer un itinéraire
 
-    MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+    MongoClient.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`, (err, client) => {
       try {
       if (err) throw err
 
