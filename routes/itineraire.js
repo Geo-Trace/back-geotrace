@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   // route qui permet de récupérer un itinéraire
 
-    MongoClient.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`, (err, client) => {
+    MongoClient.connect(`mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`, (err, client) => {
       try {
       if (err) throw err
 
