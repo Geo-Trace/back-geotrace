@@ -1,0 +1,7 @@
+node_modules
+commitlint.config.js
+LICENSE
+*.md 
+.*
+sonar-project.properties
+Dockerfile
